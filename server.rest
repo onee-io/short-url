@@ -1,0 +1,10 @@
+GET http://127.0.0.1:3001/5
+
+###
+
+POST http://127.0.0.1:3001
+Content-Type: application/json
+
+{
+    "url": "https://www.onee.io"
+}

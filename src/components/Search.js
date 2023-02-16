@@ -7,7 +7,10 @@ const Search = () => {
     const dispatch = useDispatch();
     const [url, setUrl] = useState('');
     // 处理按键事件
-    const handleClick = () => dispatch(generateShortUrl(url));
+    const handleClick = () => {
+        dispatch(generateShortUrl(url));
+        setUrl('');
+    }
     return (
         <div className="flex mb-10">
             <input
