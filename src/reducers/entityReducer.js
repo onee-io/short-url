@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import QRCode from 'qrcode';
 import entityService from '../services/entity';
+import copy from 'copy-to-clipboard';
+import { setError } from './errorReducer';
 
 const slice = createSlice({
     name: 'entity',
@@ -19,20 +21,20 @@ export const { setEntity, clearEntity } = slice.actions;
 
 export const generateShortUrl = originUrl => {
     return async dispatch => {
-        const shortUrl = await entityService.shortUrl(originUrl);
-        const qrcode = await QRCode.toDataURL(shortUrl, {
-            errorCorrectionLevel: 'H',
-            version: 4,
-            type: 'image/jpeg',
-            rendererOpts: {
-                quality: 1
-            }
-        });
-        dispatch(setEntity({
-            originUrl,
-            shortUrl,
-            qrcode
-        }))
+        try {
+            const res = await entityService.shortUrl(originUrl);
+            const shortUrl = `${window.location.origin}/${res.code}`;
+            const qrcode = await QRCode.toDataURL(shortUrl, { errorCorrectionLevel: 'H' });
+            dispatch(setEntity({
+                originUrl,
+                shortUrl,
+                qrcode,
+                code: res.code
+            }));
+            copy(shortUrl);
+        } catch (error) {
+            dispatch(setError(error.message));
+        }
     }
 }
 

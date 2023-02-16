@@ -31,23 +31,22 @@ app.get('/:code', async (request, response) => {
     const code = request.params.code;
     const originUrl = await redis.hget(redisKey.map, code);
     if (!originUrl) {
-        return response.status(404).json({ error: '未知 URL' }).end();
+        return response.status(404).json({ error: 'Unknown URL' }).end();
     }
     response.redirect(originUrl);
 });
 
 app.post('/', async (request, response) => {
-    const body = request.body;
-    const url = body.url;
-    if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
-        return response.status(400).json({ error: 'URL 格式错误' }).end();
+    const encodedUrl = encodeURI(request.body.url);
+    if (!/^((https|http)?:\/\/)[^\s]+/.test(encodedUrl)) {
+        return response.status(400).json({ error: 'Incorrect URL format' }).end();
     }
     const id = await redis.incrby(redisKey.code, 1);
     const code = encode(id);
     const entity = {};
-    entity[code] = url;
+    entity[code] = encodedUrl;
     await redis.hmset(redisKey.map, entity);
-    response.json({ url, code });
+    response.json({ url: encodedUrl, code });
 });
 
 const PORT = 3001;

@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import entityReducer from './reducers/entityReducer';
+import errorReducer from './reducers/errorReducer';
 
 const store = configureStore({
     reducer: {
-        entity: entityReducer
+        entity: entityReducer,
+        error: errorReducer
     }
 });
-
-console.log('state  =>', store.getState());
 
 export default store;
