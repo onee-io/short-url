@@ -43,9 +43,7 @@ app.post('/', async (request, response) => {
     }
     const id = await redis.incrby(redisKey.code, 1);
     const code = encode(id);
-    const entity = {};
-    entity[code] = encodedUrl;
-    await redis.hmset(redisKey.map, entity);
+    await redis.hmset(redisKey.map, { [code]: encodedUrl });
     response.json({ url: encodedUrl, code });
 });
 
