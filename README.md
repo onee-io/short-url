@@ -34,7 +34,7 @@
 
 3. 访问 [http://localhost:3000](http://localhost:3000) 即可使用；
 
-### 方式二：通过 express 打包部署（推荐）
+### 方式二：通过 express 代理静态资源部署（推荐）
 
 1. 执行 `npm run build` 将前端编译为静态文件（生成的 build 目录不要删除）；
 
@@ -42,7 +42,7 @@
 
 3. 访问 [http://localhost:3001](http://localhost:3001) 即可使用；
 
-### 方式三：Docker 部署（推荐）
+### 方式三：通过 Docker 部署（推荐）
 
 1. 执行 `docker build -t short-url .` 打包镜像；
 
