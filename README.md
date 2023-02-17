@@ -21,10 +21,14 @@
 
 1. 执行 `npm install` 安装依赖包；
 
-2. 将 `.env.example` 文件重命名为 `.env`，并将 `YOUR_REDIS_URL` 替换为你的 Redis 连接地址，示例如下：
+2. 将 `.env.example` 文件重命名为 `.env`，并按你的 Redis 实际情况填写好配置信息；
 
-- 单机模式无密码：`redis://127.0.0.1:6379`
-- 单机模式有密码：`redis://:yourpassword@127.0.0.1:6379`
+| 配置            | 默认值     | 说明                        |
+| -------------- | --------- | --------------------------- |
+| REDIS_HOST     | 127.0.0.1 | Redis 服务 IP 地址，支持 IPv6 |
+| REDIS_PORT     | 6379      | Redis 服务端口               |
+| REDIS_USERNAME |           | 用户名，没有留空即可           |
+| REDIS_PASSWORD |           | 密码，没有留空即可             |
 
 ### 方式一：前后端分离部署
 
