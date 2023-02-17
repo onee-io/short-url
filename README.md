@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Short URL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+将长链接转为短链接的小工具，完全开源、免费、无需登录，可私有化部署，可配合免费的无服务器云平台使用，短链接可永久有效。
 
-## Available Scripts
+体验地址 👉 [缩啦 —— 简单易用的短链接生成工具，链接永久有效！](https://chuanmu.co/)
 
-In the project directory, you can run:
+服务托管在 [fly.io](https://fly.io) 平台，此平台可通过 Docker 部署任意类型的应用，前三个应用免费，推荐使用。
 
-### `npm start`
+## 效果演示
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Demo](./docs/demo.gif)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 环境依赖
 
-### `npm test`
+- NodeJS 16+
+- Redis 5+
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 部署步骤
 
-### `npm run build`
+### 前置操作
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. 执行 `npm install` 安装依赖包；
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. 将 `.env.example` 文件重命名为 `.env`，并将 `YOUR_REDIS_URL` 替换为你的 Redis 连接地址，示例如下：
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 单机模式无密码：`redis://127.0.0.1:6379`
+- 单机模式有密码：`redis://:yourpassword@127.0.0.1:6379`
 
-### `npm run eject`
+### 方式一：前后端分离部署
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. 执行 `npm run server` 启动后端服务，占用端口 3001；
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. 执行 `npm start` 启动前端服务，占用端口 3000；
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. 访问 [http://localhost:3000](http://localhost:3000) 即可使用；
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 方式二：通过 express 打包部署（推荐）
 
-## Learn More
+1. 执行 `npm run build` 将前端编译为静态文件（生成的 build 目录不要删除）；
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. 执行 `npm run server` 启动服务；
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. 访问 [http://localhost:3001](http://localhost:3001) 即可使用；
 
-### Code Splitting
+### 方式三：Docker 部署（推荐）
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. 执行 `docker build -t short-url .` 打包镜像；
 
-### Analyzing the Bundle Size
+2. 执行 `docker run -d -p3001:3001 short-url` 启动容器；
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. 访问 [http://localhost:3001](http://localhost:3001) 即可使用；
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
