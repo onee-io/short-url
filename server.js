@@ -6,13 +6,14 @@ const morgan = require('morgan');
 morgan.token('body', (req) => JSON.stringify(req.body));
 
 const Redis = require('redis');
-const redisUrl = process.env.REDIS_URL;
 const redis = Redis.createClient({
-    url: redisUrl,
-    pingInterval: 5 * 60 * 1000,
     socket: {
-        family: redisUrl.indexOf('[') === -1 ? 4 : 6 // support ipv6
-    }
+        host: process.env.REDIS_HOST || '127.0.0.1',
+        port: process.env.REDIS_PORT || 6379
+    },
+    username: process.env.REDIS_USERNAME || null,
+    password: process.env.REDIS_PASSWORD || null,
+    pingInterval: 5 * 60 * 1000,
 });
 redis.on('error', err => console.error(err, 'Redis error'));
 redis.on('connect', () => console.log('Redis is connect'));
