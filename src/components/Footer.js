@@ -9,7 +9,7 @@ const Footer = () => {
             &nbsp;构建｜
             <a className="underline" href="https://github.com/onee-io/short-url" target="_blank" rel="noopener noreferrer">源码</a>
             ｜
-            <a className="underline" href="/">请站长喝杯咖啡</a>
+            <a className="underline" href="mailto:oneewy@gmail.com">联系站长</a>
         </div>
     );
 }

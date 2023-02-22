@@ -24,7 +24,7 @@ const redisKey = {
     map: 'short-url:map'
 };
 
-const _alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const _alphabet = 'GS2w4R6789IbcdHEXhijWZAzopTrxPNq3sLMJalBVyQeDmY0nugtF5Uv1fkOCK';
 const _base = _alphabet.length;
 const encode = (id) => {
     let code = '';
