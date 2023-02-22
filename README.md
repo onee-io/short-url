@@ -8,7 +8,7 @@
 
 ## 效果演示
 
-![Demo](https://cdn.jsdelivr.net/gh/onee-io/short-url/docs/demo.gif)
+![Demo](https://cdn.jsdelivr.net/gh/onee-io/short-url/docs/demo1.gif)
 
 ## 环境依赖
 
