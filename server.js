@@ -48,7 +48,7 @@ app.get('/:code', async (request, response) => {
     response.redirect(originUrl);
 });
 
-app.post('/', async (request, response) => {
+app.post('/url', async (request, response) => {
     const encodedUrl = encodeURI(request.body.url);
     if (!/^((https|http)?:\/\/)[^\s]+/.test(encodedUrl)) {
         return response.status(400).json({ error: 'Incorrect URL format' }).end();

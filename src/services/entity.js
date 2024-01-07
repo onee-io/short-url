@@ -6,7 +6,7 @@ import axios from "axios";
  * @returns 短链接
  */
 const shortUrl = async url => {
-    const res = await axios.post('/', { url });
+    const res = await axios.post('/url', { url });
     return res.data;
 }
 
